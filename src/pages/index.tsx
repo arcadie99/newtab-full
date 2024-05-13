@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 import SearchComponent from "@/Components/SearchComponent";
-import SettingsManager from "@/Components/SettingsManager";
 import ServiceStatus from "@/Components/ServiceStatus";
 import ShortcutLinks from "@/Components/ShortcutLinks";
 import SettingManager from "@/Components/SettingManager";

@@ -12,8 +12,10 @@
     "@headlessui/react": "^2.0.3",
     "framer-motion": "^11.1.9",
     "next": "14.2.3",
+    "next-connect": "^1.0.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/node": "^20",
