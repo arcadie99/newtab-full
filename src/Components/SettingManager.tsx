@@ -186,15 +186,6 @@ const fetchServices = async () => {
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="space-y-8">
           <h2 className="text-lg font-semibold text-gray-800">Manage Links</h2>
-          <div>
-            {links.map(link => (
-                  <div key={link.id}>
-                      {link.name} - {link.link}
-                      <button onClick={() => handleDeleteLink(link?.id)}>Delete</button>
-                  </div>
-              ))}
-            </div>
-
             <div className="space-y-4">
             {links.map(service => (
                 <div key={service.id} className="bg-white shadow overflow-hidden sm:rounded-lg p-4 flex justify-between items-center">
