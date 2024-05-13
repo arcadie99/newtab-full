@@ -1,13 +1,31 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const ServiceStatusComponent = ({ serviceName }: {serviceName: string}) => {
-    const [isActive, setIsActive] = useState(true);  // Simulated state of the service
+const ServiceStatusComponent = ({ serviceName }: { serviceName: string }) => {
+    const [isActive, setIsActive] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Function to toggle service state
-    const toggleServiceStatus = () => {
-        setIsActive(!isActive);
-    };
+    const fetchServiceStatus = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const response = await fetch(`/api/serviceStatus?serviceName=${encodeURIComponent(serviceName)}`);
+            const data = await response.json();
+            if (response.ok) {
+                setIsActive(data.status.includes('running'));
+            } else {
+                throw new Error(data.error || 'Failed to fetch service status');
+            }
+        } catch (error) {
+            console.error('Error fetching service status:', error);
+            setIsActive(false);  // Assume not active if there is an error
+        }
+        setIsLoading(false);
+    }, [serviceName]);  // Dependency array includes anything that `fetchServiceStatus` depends on
+
+    useEffect(() => {
+        fetchServiceStatus();
+    }, [fetchServiceStatus]);  // Now you can include `fetchServiceStatus` here safely
+
 
     return (
         <div className="flex items-center justify-center p-4">
@@ -20,13 +38,13 @@ const ServiceStatusComponent = ({ serviceName }: {serviceName: string}) => {
                 />
                 <p className="text-xl font-semibold mt-3">{serviceName}</p>
                 <p className={`text-md mt-1 font-medium ${isActive ? 'text-green-700' : 'text-red-700'}`}>
-                    {isActive ? 'Active' : 'Inactive'}
+                    {isLoading ? 'Loading...' : (isActive ? 'Active' : 'Inactive')}
                 </p>
                 <button
-                    onClick={toggleServiceStatus}
+                    onClick={fetchServiceStatus}
                     className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
                 >
-                    Toggle Status
+                    Refresh Status
                 </button>
             </div>
         </div>
