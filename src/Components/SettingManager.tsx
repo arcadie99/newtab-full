@@ -176,12 +176,10 @@ const fetchServices = async () => {
     }
   };
 
-  console.log(links, services);
-
   return (
     <>
       <button onClick={handleOpenModal} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Open Settings
+        Open Settings ⚙️
       </button>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="space-y-8">
