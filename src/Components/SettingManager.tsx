@@ -194,7 +194,7 @@ const fetchServices = async () => {
                         onClick={() => handleDeleteLink(service?.id)}
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
-                        Delete
+                        🗑️ Delete
                     </button>
                 </div>
             ))}
@@ -234,7 +234,7 @@ const fetchServices = async () => {
                         onClick={() => handleDeleteService(service?.id)}
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
-                        Delete
+                        🗑️ Delete
                     </button>
                 </div>
             ))}

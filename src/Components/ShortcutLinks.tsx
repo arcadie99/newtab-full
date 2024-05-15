@@ -24,7 +24,7 @@ const ShortcutLinks: React.FC<ShortcutLinksProps> = ({ links }) => {
           rel="noopener noreferrer"
         >
           <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
-            {link.name}
+            🌍 {link.name}
           </span>
         </a>
       ))}

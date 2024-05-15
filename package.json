@@ -11,7 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^2.0.3",
     "@prisma/client": "^5.13.0",
-    "framer-motion": "^11.1.9",
+    "framer-motion": "^11.2.2",
     "next": "14.2.3",
     "next-connect": "^1.0.0",
     "react": "^18",

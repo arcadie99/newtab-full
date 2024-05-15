@@ -44,7 +44,7 @@ const ServiceStatusComponent = ({ serviceName }: { serviceName: string }) => {
                     onClick={fetchServiceStatus}
                     className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
                 >
-                    Refresh Status
+                🔬Refresh Status
                 </button>
             </div>
         </div>

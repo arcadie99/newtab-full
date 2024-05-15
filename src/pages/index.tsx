@@ -3,10 +3,14 @@ import SearchComponent from "@/Components/SearchComponent";
 import ServiceStatus from "@/Components/ServiceStatus";
 import ShortcutLinks from "@/Components/ShortcutLinks";
 import SettingManager from "@/Components/SettingManager";
+
+import StarryBackground from '../components/StarryBackground';
+
 import { prisma } from '@/lib/prisma';
 
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
+import DynamicBackground from "@/Components/DynamicBackground";
 const inter = Inter({ subsets: ["latin"] });
 interface Link {
   id: number;
@@ -53,7 +57,11 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`} >
+    <main className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}  >
+
+        {/* <DynamicBackground /> */}
+
+        <StarryBackground />
 
         <SettingManager db_links={links} db_services={services} refetchData={fetchData} />
 

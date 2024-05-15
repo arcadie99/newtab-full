@@ -25,7 +25,7 @@ const SearchComponent = () => {
         type="submit" 
         className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-r-lg shadow-sm transition-colors duration-300"
       >
-        Search
+        🔎 Search
       </button>
     </form>
   );
