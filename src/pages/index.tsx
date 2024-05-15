@@ -4,7 +4,7 @@ import ServiceStatus from "@/Components/ServiceStatus";
 import ShortcutLinks from "@/Components/ShortcutLinks";
 import SettingManager from "@/Components/SettingManager";
 
-import StarryBackground from '../components/StarryBackground';
+import StarryBackground from '@/Components/StarryBackground';
 
 import { prisma } from '@/lib/prisma';
 
