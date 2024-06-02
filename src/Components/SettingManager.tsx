@@ -42,11 +42,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({db_links, db_services, ref
   const [newLink, setNewLink] = useState<Link>({ name: '', link: '' });
   const [newService, setNewService] = useState<Service>({ name: '', service: '' });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);  // This line should exist in your component
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-  //   fetch('/api/links').then(res => res.json()).then(data => setLinks(data));
-  //   fetch('/api/services').then(res => res.json()).then(data => setServices(data));
     fetchLinks();
     fetchServices();
   }, []);
@@ -129,7 +127,6 @@ const fetchServices = async () => {
 
   };
 
-  // Handle delete service
   const handleDeleteService = async (id: number|undefined) => {
     if (id) {
         const response = await fetch('/api/services/delete', {
@@ -187,8 +184,8 @@ const fetchServices = async () => {
             <div className="space-y-4">
             {links.map(service => (
                 <div key={service.id} className="bg-white shadow overflow-hidden sm:rounded-lg p-4 flex justify-between items-center">
-                    <div className="text-sm text-gray-900">
-                        <span className="font-bold">{service.name}</span> - {service.link}
+                    <div className="text-sm text-gray-900 w-auto">
+                        <span className="font-bold w-auto">{service.name}</span>
                     </div>
                     <button
                         onClick={() => handleDeleteLink(service?.id)}

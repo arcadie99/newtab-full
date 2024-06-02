@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faStop, faRedo, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 
 const ServiceStatusComponent = ({ serviceName }: { serviceName: string }) => {
     const [isActive, setIsActive] = useState(false);
@@ -17,15 +19,37 @@ const ServiceStatusComponent = ({ serviceName }: { serviceName: string }) => {
             }
         } catch (error) {
             console.error('Error fetching service status:', error);
-            setIsActive(false);  // Assume not active if there is an error
+            setIsActive(false);
         }
         setIsLoading(false);
-    }, [serviceName]);  // Dependency array includes anything that `fetchServiceStatus` depends on
+    }, [serviceName]);
 
     useEffect(() => {
         fetchServiceStatus();
-    }, [fetchServiceStatus]);  // Now you can include `fetchServiceStatus` here safely
+    }, [fetchServiceStatus]);
 
+    const handleServiceAction = async (action: any) => {
+        setIsLoading(true);
+        try {
+            const response = await fetch(`/api/services/${action}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ serviceName }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log(data.message);
+                fetchServiceStatus();
+            } else {
+                throw new Error(data.error || `Failed to ${action} service`);
+            }
+        } catch (error) {
+            console.error(`Error ${action} service:`, error);
+        }
+        setIsLoading(false);
+    };
 
     return (
         <div className="flex items-center justify-center p-4">
@@ -41,10 +65,31 @@ const ServiceStatusComponent = ({ serviceName }: { serviceName: string }) => {
                     {isLoading ? 'Loading...' : (isActive ? 'Active' : 'Inactive')}
                 </p>
                 <button
-                    onClick={fetchServiceStatus}
-                    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+                    onClick={() => handleServiceAction('start')}
+                    className="mt-2 m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+                    disabled={isLoading}
                 >
-                🔬Refresh Status
+                    <FontAwesomeIcon icon={faPlay} />
+                </button>
+                <button
+                    onClick={() => handleServiceAction('stop')}
+                    className="mt-2 m-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+                    disabled={isLoading}
+                >
+                    <FontAwesomeIcon icon={faStop} />
+                </button>
+                <button
+                    onClick={() => handleServiceAction('restart')}
+                    className="mt-2 m-2 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+                    disabled={isLoading}
+                >
+                    <FontAwesomeIcon icon={faRedo} />
+                </button>
+                <button
+                    onClick={fetchServiceStatus}
+                    className="mt-4 m-2  bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+                >
+                    <FontAwesomeIcon icon={faSyncAlt} />
                 </button>
             </div>
         </div>
